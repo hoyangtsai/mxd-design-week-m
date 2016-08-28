@@ -1,0 +1,62 @@
+@import "lib/_mixins.scss";
+
+html, body {
+  height: 100%;
+  position: relative;
+}
+
+.home-wrap {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: url("../img/home-bg.png") no-repeat;
+  background-size: cover;
+  padding-top: 2.98rem;
+  position: relative;
+}
+
+.cover-title {
+  flex: 0 0 .96rem;
+  width: 5.63rem;
+  height: .96rem;
+  @include sprite("../slice/cover-title.png", index);
+  margin-bottom: 4.64rem;
+}
+
+.notice {
+  &:before {
+    content: "";
+    display: inline-block;
+    vertical-align: top;
+    width: .44rem;
+    height: .44rem;
+    @include sprite("../slice/icon-bluetooth.png", index);
+    margin-right: .23rem;
+  }
+  font-size: .33rem;
+  color: #fff;
+  line-height: .44rem;
+  margin-bottom: .2rem;
+}
+
+.go-btn {
+  flex: 0 0 .82rem;
+  width: 5.9rem;
+  height: .82rem;
+  background: rgba(0, 0, 0, .3);
+  border-radius: .37rem;
+  color: #fff;
+  text-align: center;
+  line-height: .82rem;
+  font-weight: bold;
+}
+
+.copyright {
+  flex: 0 0 .58rem;
+  width: 4.39rem;
+  height: .58rem;
+  @include sprite("../slice/copyright.png", index);
+  position: absolute;
+  bottom: .24rem;
+}

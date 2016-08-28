@@ -1,0 +1,69 @@
+html, body {
+  height: 100%;
+  position: relative;
+}
+
+.home-wrap {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: url("../img/home-bg.png") no-repeat;
+  background-size: cover;
+  padding-top: 2.98rem;
+  position: relative;
+}
+
+.cover-title {flex: 0 0 .96rem;
+  width: 5.63rem;
+  height: .96rem;
+  
+  margin-bottom: 4.64rem;background-repeat: no-repeat;}
+
+.notice {
+  font-size: .33rem;
+  color: #fff;
+  line-height: .44rem;
+  margin-bottom: .2rem;
+}
+
+.notice:before {content: "";
+  display: inline-block;
+  vertical-align: top;
+  width: .44rem;
+  height: .44rem;
+  
+  margin-right: .23rem;background-repeat: no-repeat;}
+
+.go-btn {
+  flex: 0 0 .82rem;
+  width: 5.9rem;
+  height: .82rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: .37rem;
+  color: #fff;
+  text-align: center;
+  line-height: .82rem;
+  font-weight: bold;
+}
+
+.copyright {flex: 0 0 .58rem;
+  width: 4.39rem;
+  height: .58rem;
+  
+  position: absolute;
+  bottom: .24rem;background-repeat: no-repeat;}
+
+.cover-title{
+    background-position:0rem 0rem ;
+}
+.notice:before{
+    background-position:0rem -3.54rem ;
+}
+.copyright{
+    background-position:0rem -1.96rem ;
+}
+.cover-title,.notice:before,.copyright{
+    background-size: 6.63rem 3.98rem ;
+    background-image: url(../sprite/index.png)
+}

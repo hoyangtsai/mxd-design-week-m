@@ -1,5 +1,5 @@
 fis.set("atm", {
-    useSprite: false, // 是否在开发阶段使用雪碧图合并
+    useSprite: true, // 是否在开发阶段使用雪碧图合并
     useOptimize: false, // 是否压缩css
     useHash: false, // 是否给文件名加上hash值
     useDomain: false,  // 是否使用CDN路径
@@ -79,9 +79,9 @@ fis.match('**', {
     spriter: fis.plugin('csssprites', {
         htmlUseSprite: true,
         layout: 'matrix',
-        margin: '16',
-        scale: 0.5,
-        //px2rem: 16,  // 是否使用rem单位
+        margin: '100',
+        scale: 1,
+        px2rem: 100,  // 是否使用rem单位
         styleReg: /(<style(?:(?=\s)[\s\S]*?["'\s\w\/\-]>|>))([\s\S]*?)(<\/style\s*>|$)/ig
     }),
     postpackager: [fis.plugin('list-html'), fis.plugin('open', {

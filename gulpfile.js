@@ -58,7 +58,7 @@ gulp.task('connect', function() {
 
 gulp.task('watchcss', function() {
     return gulp.src('publish/css/**')
-        .pipe(postcss([ autoprefixer({ browsers: ['> 5%', 'ie >= 8'] }), precss ]))
+        .pipe(postcss([ autoprefixer({ browsers: ['iOS 7', 'Android >= 4.0'] }), precss ]))
         .pipe(gulp.dest('./publish/css'));
 });
 
