@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html data-use-rem>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1, user-scalable=0,maximum-scale=1">
+  <title>成功搜集一张海报</title>
+  <link rel="shortcut icon" href="#"/>
+  <link rel="stylesheet" href="../css/g.css"/>
+  <link rel="stylesheet" href="../css/index.css"/>
+  <script src="../js/grid.js"></script>
+  <script src="../js/jquery-3.1.0.min.js"></script>
+  <script src="../js/g.js"></script>
+</head>
+<body>
+
+<div class="page-wrap">
+  <div id="open-succ" class="open-succ" style="display: none;">
+    <div class="title-wrap">
+      <h3 class="title__centered">成功搜集一张海报</h3>
+    </div>
+    <div class="poster-cont">
+      <span id="poster-close" class="poster-close"></span>
+      <img src="../img/xingyang-cover.png" alt="">
+    </div>
+    <div class="btn-wrap">
+      <span id="btn-detail" class="page-btn" href="#">活动详情</span>
+    </div>
+  </div>
+
+  <div id="detail-cont" class="detail-cont" style="display: none;">
+    <img id="detail-img" src="../img/xingyang.jpg" alt="">
+  </div>
+</div>
+
+<script>
+$(function() {
+  var itemid = getUrlPara('itemid');
+  var detail = getUrlPara('detail');
+
+  if (parseInt(detail) == 1) {
+    $('#detail-cont').show();
+  } else {
+    $('#open-succ').show();
+  }
+
+  $('#btn-detail').on('click', function(e) {
+    e.stopPropagation();
+    if (!itemid) return;
+    switch (parseInt(itemid)) {
+      case 1:
+        $('#detail-img').attr('src', '../img/xingyang.jpg');
+        $('#open-succ').hide();
+        $('#detail-cont').show();
+        break;
+      default:
+        return;
+        break;
+    }
+  });
+
+  $('#poster-close').on('click', function(e) {
+    e.stopPropagation();
+    window.location = './open.html';
+  });
+
+});
+</script>
+</body>
+</html>

@@ -3,35 +3,75 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1, user-scalable=0,maximum-scale=1">
+  <title>海报墙</title>
   <link rel="shortcut icon" href="#"/>
   <link rel="stylesheet" href="../css/g.css"/>
   <link rel="stylesheet" href="../css/index.css"/>
+  <script src="../js/g.js"></script>
   <script src="../js/grid.js"></script>
+  <script src="../js/jquery-3.1.0.min.js"></script>
 </head>
 <body>
 <div class="page-wrap">
-  <h3 class="page-title">对奖方法</h3>
-  <div class="btn-wrap">
-    <a href="" class="btn-get-voucher">领取兑换券</a>
-  </div>
-  <div class="poster-wall">
-    <div class="poster-row">
-      <a href="" class="poster-item">
-        <img src="http://placeholder.qiniudn.com/300x400" alt="">
-      </a>
-      <a href="" class="poster-item">
-        <img src="http://placeholder.qiniudn.com/300x400" alt="">
-      </a>
+  <div class="gallery-wrap">
+    <div class="btn-wrap">
+      <a href="" class="btn-get-voucher">领取兑换券</a>
     </div>
-    <div class="poster-row">
-      <a href="" class="poster-item">
-        <img src="http://placeholder.qiniudn.com/300x400" alt="">
-      </a>
-      <a href="" class="poster-item">
-        <img src="http://placeholder.qiniudn.com/300x400" alt="">
-      </a>
+    <div class="poster-wall">
+      <div class="poster-row">
+        <a id="poster-1" href="" class="poster-item">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+        </a>
+        <a id="poster-2" href="./poster.html?itemid=1&detail=1" class="poster-item">
+          <!-- <img src="../img/xingyang-cover.png" alt=""> -->
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+        </a>
+      </div>
+      <div class="poster-row">
+        <a id="poster-3" href="" class="poster-item">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+        </a>
+        <a id="poster-4" href="" class="poster-item">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+        </a>
+      </div>
     </div>
   </div>
 </div>
+
+<script>
+$(function() {
+  setUser('ohD2qjmtST3rseNCG7M9yTRLk4JA');
+
+  var host = '//mxd.tencent.com/weixin/160818-mbd/server/'
+
+  $.ajax({
+    url: host + 'ajax?user=true&getAllItem=true',
+    type: 'GET',
+    data: {},
+    xhrFields: {
+      withCredentials: true
+    }
+  })
+  .done(function(e) {
+    console.log(e);
+    for (var i in e) {
+      var itemId = e[i].itemId;
+      switch (parseInt(itemId)) {
+        case 1:
+          $('#poster-2').children('img').attr('src', '../img/xingyang-cover.png');
+          break;
+        default:
+          break;
+      }
+    }
+  })
+  .fail(function(e) {
+    console.log('error : ', e);
+  });
+
+
+});
+</script>
 </body>
 </html>
