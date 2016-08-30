@@ -103,9 +103,8 @@ fis.match('**', {
         deploy: [fis.plugin('local-deliver', {
             to: './publish'
         }), fis.plugin('http-push', {
-            receiver: 'http://wapstatic.kf0309.3g.qq.com/receiver/receiver2.php',
-            to: '/data/wapstatic/' + atmConf.userName + '/' + atmConf.projectName,
-            type: 'zip'
+            receiver: 'http://mxd.tencent.com/weixin/wei46965994453261994long/receiver.php',
+            to: '/data/vhost_data/wsd.tencent.com/weixin/160818-mbd'
         })]
     });
 });

@@ -74,24 +74,24 @@
     </div>
     <div class="poster-wall">
       <div class="poster-row">
-        <a id="poster-1" href="" class="poster-item">
+        <div id="poster-1" id="poster-item" class="poster-item">
           <p>1</p>
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
-        </a>
-        <a id="poster-2" href="" class="poster-item">
+        </div>
+        <div id="poster-2" id="poster-item" class="poster-item">
           <p>2</p>
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
-        </a>
+        </div>
       </div>
       <div class="poster-row">
-        <a id="poster-3" href="" class="poster-item">
+        <div id="poster-3" id="poster-item" class="poster-item">
           <p>3</p>
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
-        </a>
-        <a id="poster-4" href="" class="poster-item">
+        </div>
+        <div id="poster-4" id="poster-item" class="poster-item">
           <p>4</p>
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
-        </a>
+        </div>
       </div>
     </div>
   </div>
@@ -106,6 +106,7 @@ $(function() {
 
   $(window).on('popstate', function() {
     history.pushState({}, null, './index.html');
+    document.title = 'MXD GO';
     $('#open-succ').hide();
     $('#open-failed').hide();
     $('#detail-cont').hide();
@@ -216,6 +217,7 @@ $(function() {
           document.title = '成功搜集一张海报';
           $('#open-succ').show();
         } else {
+          document.title = '没有发现海报';
           $('#open-failed').show();
         }
       },
@@ -230,6 +232,7 @@ $(function() {
   $('#btn-continue').on('click', function(e) {
     e.stopPropagation();
     history.pushState({}, null, './index.html');
+    document.title = 'MXD GO';
     $('#open-failed').hide();
     $('#scenes-cont').show();
   });
@@ -239,6 +242,7 @@ $(function() {
   $('#poster-close').on('click', function(e) {
     e.stopPropagation();
     history.pushState({}, null, './index.html');
+    document.title = 'MXD GO';
     $('#open-succ').hide();
     $('#scenes-cont').show();
   });
@@ -272,6 +276,15 @@ $(function() {
     $('#scenes-cont').hide();
     $('#gallery-wrap').show();
   });
+
+  $('.poster-item').on('click', function(e){
+    e.stopPropagation();
+    var itemid = this.id.slice(-1);
+    setDetailImg(itemid);
+    $('#gallery-wrap').hide();
+    $('#detail-cont').show();
+  });
+
 });
 </script>
 </body>
