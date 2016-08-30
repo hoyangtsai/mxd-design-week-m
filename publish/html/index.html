@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html data-use-rem>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1, user-scalable=0,maximum-scale=1">
+  <title>MXD GO</title>
+  <link rel="shortcut icon" href="#"/>
+  <link rel="stylesheet" href="../css/g.css"/>
+  <link rel="stylesheet" href="../css/index.css"/>
+  <script src="../js/grid.js"></script>
+  <script src="../js/jquery-3.1.0.min.js"></script>
+  <script src="../js/g.js"></script>
+</head>
+<body>
+<div class="page-wrap">
+  <div id="home-cont" class="home-cont">
+    <div class="cover-title"></div>
+    <div class="notice">开启蓝牙，最佳体验</div>
+    <span href="" id="btn-go" class="btn-go">GO !</span>
+    <div class="copyright"></div>
+  </div>
+
+  <div id="scenes-cont" class="scenes-cont" style="display: none;">
+    <i id="scroll-1" class="scroll" style="top: 3rem; right: 2rem;"></i>
+    <i id="scroll-4" class="scroll" style="top: 6rem; left: 2rem;"></i>
+    <a class="gallery-entry" href="./gallery.html"></a>
+  </div>
+</div>
+
+<script>
+$(function() {
+
+  $('#btn-go').on('click', function(e) {
+    $('#home-cont').hide();
+    $('#scenes-cont').show();
+  });
+
+  $('.scroll').on('click', function(e){
+    e.stopPropagation();
+    var itemid = this.id.slice(-1);
+    window.location = './open.html?itemid=' + itemid;
+  });
+});
+</script>
+</body>
+</html>
