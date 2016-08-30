@@ -5,6 +5,7 @@ html, body {
 
 .page-wrap {
   height: 100%;
+  position: relative;
 }
 
 .home-cont {
@@ -234,6 +235,8 @@ html, body {
 }
 
 .gallery-wrap {
+  width: 100%;
+  height: 100%;
   padding-top: 2rem;
 }
 
@@ -241,6 +244,7 @@ html, body {
   width: 100%;
   height: 100%;
   position: relative;
+  z-index: 10;
 }
 
 .scenes-cont .scroll {

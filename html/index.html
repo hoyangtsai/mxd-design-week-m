@@ -64,6 +64,10 @@
     </div>
   </div>
 
+  <div id="detail-cont" class="detail-cont" style="display: none;">
+    <img id="detail-img" src="" alt="">
+  </div>
+
   <div id="gallery-wrap" class="gallery-wrap" style="display: none;">
     <div class="btn-wrap">
       <a href="" class="btn-get-voucher">领取兑换券</a>
@@ -91,19 +95,19 @@
       </div>
     </div>
   </div>
-
-  <div id="detail-cont" class="detail-cont" style="display: none;">
-    <img id="detail-img" src="" alt="">
-  </div>
 </div>
+
 
 <script>
 $(function() {
+  // setUser('ohD2qjmtST3rseNCG7M9yTRLk4JA');
+
   var host = '//mxd.tencent.com/weixin/160818-mbd/server/'
 
   $(window).on('popstate', function() {
-    console.log(event.state);
+    history.pushState({}, null, './index.html');
     $('#open-succ').hide();
+    $('#open-failed').hide();
     $('#detail-cont').hide();
     $('#scenes-cont').show();
   });
@@ -124,6 +128,7 @@ $(function() {
     }
   }
 
+  // set detail image
   function setDetailImg(itemid) {
     switch (parseInt(itemid)) {
       case 1:
@@ -143,30 +148,56 @@ $(function() {
     }
   }
 
+  // set gallery list
+  function setGallery(items) {
+    for (var i = 0; i < items.length; i++) {
+      switch (parseInt(items[i].itemId)) {
+        case 1:
+          $('#poster-1')
+            .attr('href', './open.html?itemid=1&detail=1')
+            .children('img').attr('src', '../img/dida-cover.jpg');
+          break;
+        case 3:
+          $('#poster-3')
+            .attr('href', './open.html?itemid=3&detail=1')
+            .children('img').attr('src', '../img/xingyang-cover.png');
+          break;
+        case 4:
+          $('#poster-4')
+            .attr('href', './open.html?itemid=4&detail=1')
+            .children('img').attr('src', '../img/xingyang-cover.png');
+          break;
+        default:
+          break;
+      }
+    }
+  }
+
+  // hide home
+  // show scenes
   $('#btn-go').on('click', function(e) {
     e.stopPropagation();
     $('#home-cont').hide();
     $('#scenes-cont').show();
   });
 
+  // find scroll
+  // show open scroll container
   $('.scroll').on('click', function(e){
     e.stopPropagation();
-
     $('#scenes-cont').hide();
     $('#open-cont').show();
-
     var itemid = this.id.slice(-1);
     history.pushState({itemid: itemid}, null, '?itemid=' + itemid);
   });
 
-
+  // hide open container
+  // show open succeed or open failed
   $('#open-scroll').on('click', function(e) {
     e.stopPropagation();
-
     var itemid = getUrlPara('itemid');
     var position = undefined;
     var time = undefined;
-
     $.ajax({
       url: host + 'ajax?user=true&openBox=true',
       type: 'POST',
@@ -179,13 +210,12 @@ $(function() {
         withCredentials: true
       },
       success: function(data, status, xhr) {
+        $('#open-cont').hide();
         if (data == 1) {
-          $('#open-cont').hide();
           setPosterCover(itemid);
           document.title = '成功搜集一张海报';
           $('#open-succ').show();
         } else {
-          $('#open-cont').hide();
           $('#open-failed').show();
         }
       },
@@ -195,6 +225,8 @@ $(function() {
     })
   });
 
+  // go back scenes
+  // hide open failed
   $('#btn-continue').on('click', function(e) {
     e.stopPropagation();
     history.pushState({}, null, './index.html');
@@ -202,6 +234,8 @@ $(function() {
     $('#scenes-cont').show();
   });
 
+  // go back scenes
+  // hide open succeed
   $('#poster-close').on('click', function(e) {
     e.stopPropagation();
     history.pushState({}, null, './index.html');
@@ -218,6 +252,26 @@ $(function() {
     $('#detail-cont').show();
   });
 
+  $('#gallery-entry').on('click', function(e){
+    e.stopPropagation();
+    $.ajax({
+      url: host + 'ajax?user=true&getAllItem=true',
+      type: 'GET',
+      data: {},
+      xhrFields: {
+        withCredentials: true
+      },
+      success: function(data, status, xhr) {
+        setGallery(data);
+      },
+      error: function(xhr, errorType, error){
+        console.log('error : ',error);
+      }
+    });
+    history.pushState({}, null, './index.html');
+    $('#scenes-cont').hide();
+    $('#gallery-wrap').show();
+  });
 });
 </script>
 </body>
