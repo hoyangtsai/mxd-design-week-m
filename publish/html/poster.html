@@ -20,7 +20,7 @@
     </div>
     <div class="poster-cont">
       <span id="poster-close" class="poster-close"></span>
-      <img src="../img/xingyang-cover.png" alt="">
+      <img id="poster-cover" class="poster-cover" src="" alt="">
     </div>
     <div class="btn-wrap">
       <span id="btn-detail" class="page-btn" href="#">活动详情</span>
@@ -36,6 +36,26 @@
 $(function() {
   var itemid = getUrlPara('itemid');
   var detail = getUrlPara('detail');
+
+  // if (!itemid) {
+  //   window.location = './search.html';
+  // }
+
+  $(window).on('popstate', function(e) {
+    console.log('popstate fired!');
+    console.log(e);
+  });
+
+  switch (parseInt(itemid)) {
+    case 1:
+      $('#poster-cover').attr('src', '../img/dida-cover.jpg');
+      break;
+    case 4:
+      $('#poster-cover').attr('src', '../img/xingyang-cover.png');
+      break;
+    default:
+      break;
+  }
 
   if (parseInt(detail) == 1) {
     $('#detail-cont').show();
@@ -60,7 +80,7 @@ $(function() {
 
   $('#poster-close').on('click', function(e) {
     e.stopPropagation();
-    window.location = './open.html';
+    window.location = './search.html';
   });
 
 });

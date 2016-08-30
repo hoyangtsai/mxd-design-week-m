@@ -22,7 +22,7 @@
         <a id="poster-1" href="" class="poster-item">
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
         </a>
-        <a id="poster-2" href="./poster.html?itemid=1&detail=1" class="poster-item">
+        <a id="poster-2" href="" class="poster-item">
           <!-- <img src="../img/xingyang-cover.png" alt=""> -->
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
         </a>
@@ -59,7 +59,9 @@ $(function() {
       var itemId = e[i].itemId;
       switch (parseInt(itemId)) {
         case 1:
-          $('#poster-2').children('img').attr('src', '../img/xingyang-cover.png');
+          $('#poster-2')
+            .attr('href', './open.html?itemid=1&detail=1')
+            .children('img').attr('src', '../img/xingyang-cover.png');
           break;
         default:
           break;
