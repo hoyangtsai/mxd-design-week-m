@@ -31,12 +31,12 @@ gulp.task('upload', function() {
   );
 });
 
-gulp.task('uploadCss', function() {
-  return gulp.src(dist + 'css/**/*')
+gulp.task('uploadfiles', function() {
+  return gulp.src(dist + '**/*')
     .pipe(upload({
-      url: 'http://wapstatic.kf0309.3g.qq.com/receiver/receiver2.php',
+      url: 'http://mxd.tencent.com/weixin/wei46965994453261994long/receiver.php',
       root: 'publish', // for multiple files
-      remotePath: '/data/wapstatic/keithytsai/designwk_m'
+      remotePath: '/data/vhost_data/wsd.tencent.com/weixin/160818-mbd'
     })
   );
 });

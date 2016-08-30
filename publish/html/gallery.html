@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="../css/index.css"/>
   <script src="../js/g.js"></script>
   <script src="../js/grid.js"></script>
-  <script src="../js/jquery-3.1.0.min.js"></script>
+  <script src="../js/zepto.min.js"></script>
 </head>
 <body>
 <div class="page-wrap">
@@ -20,18 +20,21 @@
     <div class="poster-wall">
       <div class="poster-row">
         <a id="poster-1" href="" class="poster-item">
+          <p>1</p>
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
         </a>
         <a id="poster-2" href="" class="poster-item">
-          <!-- <img src="../img/xingyang-cover.png" alt=""> -->
+          <p>2</p>
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
         </a>
       </div>
       <div class="poster-row">
         <a id="poster-3" href="" class="poster-item">
+          <p>3</p>
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
         </a>
         <a id="poster-4" href="" class="poster-item">
+          <p>4</p>
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
         </a>
       </div>
@@ -45,33 +48,44 @@ $(function() {
 
   var host = '//mxd.tencent.com/weixin/160818-mbd/server/'
 
-  $.ajax({
-    url: host + 'ajax?user=true&getAllItem=true',
-    type: 'GET',
-    data: {},
-    xhrFields: {
-      withCredentials: true
-    }
-  })
-  .done(function(e) {
-    console.log(e);
-    for (var i in e) {
-      var itemId = e[i].itemId;
-      switch (parseInt(itemId)) {
+  function setGallery(items) {
+    for (var i = 0; i < items.length; i++) {
+      switch (parseInt(items[i].itemId)) {
         case 1:
-          $('#poster-2')
+          $('#poster-1')
             .attr('href', './open.html?itemid=1&detail=1')
+            .children('img').attr('src', '../img/dida-cover.jpg');
+          break;
+        case 3:
+          $('#poster-3')
+            .attr('href', './open.html?itemid=3&detail=1')
+            .children('img').attr('src', '../img/xingyang-cover.png');
+          break;
+        case 4:
+          $('#poster-4')
+            .attr('href', './open.html?itemid=4&detail=1')
             .children('img').attr('src', '../img/xingyang-cover.png');
           break;
         default:
           break;
       }
     }
-  })
-  .fail(function(e) {
-    console.log('error : ', e);
-  });
+  }
 
+  $.ajax({
+    url: host + 'ajax?user=true&getAllItem=true',
+    type: 'GET',
+    data: {},
+    xhrFields: {
+      withCredentials: true
+    },
+    success: function(data, status, xhr) {
+      setGallery(data);
+    },
+    error: function(xhr, errorType, error){
+      console.log('error : ',error);
+    }
+  });
 
 });
 </script>

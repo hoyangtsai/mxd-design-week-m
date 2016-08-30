@@ -8,12 +8,12 @@
   <link rel="stylesheet" href="../css/g.css"/>
   <link rel="stylesheet" href="../css/index.css"/>
   <script src="../js/grid.js"></script>
-  <script src="../js/jquery-3.1.0.min.js"></script>
+  <script src="../js/zepto.min.js"></script>
   <script src="../js/g.js"></script>
 </head>
 <body>
 <div class="page-wrap">
-  <div id="home-cont" class="home-cont">
+  <div id="home-cont" class="home-cont" style="">
     <div class="cover-title"></div>
     <div class="notice">开启蓝牙，最佳体验</div>
     <span href="" id="btn-go" class="btn-go">GO !</span>
@@ -22,24 +22,202 @@
 
   <div id="scenes-cont" class="scenes-cont" style="display: none;">
     <i id="scroll-1" class="scroll" style="top: 3rem; right: 2rem;"></i>
+    <i id="scroll-3" class="scroll" style="top: 4rem; right: 5rem;"></i>
     <i id="scroll-4" class="scroll" style="top: 6rem; left: 2rem;"></i>
-    <a class="gallery-entry" href="./gallery.html"></a>
+    <span id="gallery-entry" class="gallery-entry"></span>
+  </div>
+
+  <div id="open-cont" class="open-cont" style="display: none;">
+    <div class="title-wrap">
+      <h3 class="title__centered">发现卷轴 打开看看</h3>
+    </div>
+    <div class="flex-row__centered">
+      <img id="seal-scroll" src="../img/scroll.png" alt="">
+    </div>
+    <div class="btn-wrap">
+      <span id="open-scroll" class="page-btn">打开</span>
+    </div>
+  </div>
+
+  <div id="open-failed" class="open-failed" style="display: none;">
+    <div class="title-wrap">
+      <h3 class="title__centered">没有发现海报</h3>
+    </div>
+    <div class="flex-row__centered">
+      <img class="empty-scroll" src="../img/empty-scroll.png" alt="">
+    </div>
+    <div class="btn-wrap">
+      <span id="btn-continue" class="page-btn">继续</span>
+    </div>
+  </div>
+
+  <div id="open-succ" class="open-succ" style="display: none;">
+    <div class="title-wrap">
+      <h3 class="title__centered">成功搜集一张海报</h3>
+    </div>
+    <div class="poster-cont">
+      <span id="poster-close" class="poster-close"></span>
+      <img id="poster-cover" class="poster-cover" src="" alt="">
+    </div>
+    <div class="btn-wrap">
+      <span id="btn-detail" class="page-btn" href="#">活动详情</span>
+    </div>
+  </div>
+
+  <div id="gallery-wrap" class="gallery-wrap" style="display: none;">
+    <div class="btn-wrap">
+      <a href="" class="btn-get-voucher">领取兑换券</a>
+    </div>
+    <div class="poster-wall">
+      <div class="poster-row">
+        <a id="poster-1" href="" class="poster-item">
+          <p>1</p>
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+        </a>
+        <a id="poster-2" href="" class="poster-item">
+          <p>2</p>
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+        </a>
+      </div>
+      <div class="poster-row">
+        <a id="poster-3" href="" class="poster-item">
+          <p>3</p>
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+        </a>
+        <a id="poster-4" href="" class="poster-item">
+          <p>4</p>
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div id="detail-cont" class="detail-cont" style="display: none;">
+    <img id="detail-img" src="" alt="">
   </div>
 </div>
 
 <script>
 $(function() {
+  var host = '//mxd.tencent.com/weixin/160818-mbd/server/'
+
+  $(window).on('popstate', function() {
+    console.log(event.state);
+    $('#open-succ').hide();
+    $('#detail-cont').hide();
+    $('#scenes-cont').show();
+  });
+
+  function setPosterCover(itemId) {
+    switch (parseInt(itemId)) {
+      case 1:
+        $('#poster-cover').attr('src', '../img/dida-cover.jpg');
+        break;
+      case 3:
+        $('#poster-cover').attr('src', '../img/xingyang-cover.png');
+        break;
+      case 4:
+        $('#poster-cover').attr('src', '../img/xingyang-cover.png');
+        break;
+      default:
+        break;
+    }
+  }
+
+  function setDetailImg(itemid) {
+    switch (parseInt(itemid)) {
+      case 1:
+        document.title = '深圳第十一期 醒仰'
+        $('#detail-img').attr('src', '../img/xingyang.jpg');
+        break;
+      case 3:
+        document.title = '深圳第十一期 醒仰'
+        $('#detail-img').attr('src', '../img/xingyang.jpg');
+        break;
+      case 4:
+        document.title = '深圳第十一期 醒仰'
+        $('#detail-img').attr('src', '../img/xingyang.jpg');
+        break;
+      default:
+        break;
+    }
+  }
 
   $('#btn-go').on('click', function(e) {
+    e.stopPropagation();
     $('#home-cont').hide();
     $('#scenes-cont').show();
   });
 
   $('.scroll').on('click', function(e){
     e.stopPropagation();
+
+    $('#scenes-cont').hide();
+    $('#open-cont').show();
+
     var itemid = this.id.slice(-1);
-    window.location = './open.html?itemid=' + itemid;
+    history.pushState({itemid: itemid}, null, '?itemid=' + itemid);
   });
+
+
+  $('#open-scroll').on('click', function(e) {
+    e.stopPropagation();
+
+    var itemid = getUrlPara('itemid');
+    var position = undefined;
+    var time = undefined;
+
+    $.ajax({
+      url: host + 'ajax?user=true&openBox=true',
+      type: 'POST',
+      data: {
+        itemId: itemid,
+        position: position,
+        time: time
+      },
+      xhrFields: {
+        withCredentials: true
+      },
+      success: function(data, status, xhr) {
+        if (data == 1) {
+          $('#open-cont').hide();
+          setPosterCover(itemid);
+          document.title = '成功搜集一张海报';
+          $('#open-succ').show();
+        } else {
+          $('#open-cont').hide();
+          $('#open-failed').show();
+        }
+      },
+      error: function(xhr, errorType, error){
+        console.log('error : ',error);
+      }
+    })
+  });
+
+  $('#btn-continue').on('click', function(e) {
+    e.stopPropagation();
+    history.pushState({}, null, './index.html');
+    $('#open-failed').hide();
+    $('#scenes-cont').show();
+  });
+
+  $('#poster-close').on('click', function(e) {
+    e.stopPropagation();
+    history.pushState({}, null, './index.html');
+    $('#open-succ').hide();
+    $('#scenes-cont').show();
+  });
+
+
+  $('#btn-detail').on('click', function(e) {
+    e.stopPropagation();
+    var itemid = getUrlPara('itemid');
+    setDetailImg(itemid);
+    $('#open-succ').hide();
+    $('#detail-cont').show();
+  });
+
 });
 </script>
 </body>
