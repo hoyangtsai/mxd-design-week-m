@@ -10,13 +10,14 @@
   <script src="../js/grid.js"></script>
   <script src="../js/zepto.min.js"></script>
   <script src="../js/g.js"></script>
+  <script src="../js/path.min.js"></script>
 </head>
 <body>
 <div class="page-wrap">
   <div id="home-cont" class="home-cont" style="display: none;">
     <div class="cover-title"></div>
     <div class="notice">开启蓝牙，最佳体验</div>
-    <span href="" id="btn-go" class="btn-go">GO !</span>
+    <span id="btn-go" class="btn-go">GO !</span>
     <div class="copyright"></div>
   </div>
 
@@ -68,50 +69,36 @@
     <img id="detail-img" src="" alt="">
   </div> -->
 
-  <div id="gallery-wrap" class="gallery-wrap" style="">
+  <div id="gallery-wrap" class="gallery-wrap" style="display: none;">
     <div class="scoreboard">
       <div class="prog-wrap">
+        <span class="indicator">1</span>
         <span class="start"></span>
-        <span class="bar"></span>
-        <!-- <span class="indicator">1</span> -->
-        <span class="voucher filled"></span>
-        <span class="bar no-mgl"></span>
-        <span class="voucher blank"></span>
+        <div class="bar first">
+          <span class="progress"></span>
+        </div>
+        <span id="voucher-1" class="voucher blank"></span>
+        <div class="bar second">
+          <span class="progress"></span>
+        </div>
+        <span id="voucher-2" class="voucher blank"></span>
+      </div>
+      <div class="text-wrap">
+        <div class="start">
+          <p>开始</p>
+        </div>
+        <div class="first-bar"></div>
+        <div class="milestone">
+          <p>集5张海报</p>
+          <p>获得1张礼品券</p>
+        </div>
+        <div class="second-bar"></div>
+        <div class="milestone">
+          <p>集10张海报</p>
+          <p>获得1张礼品券</p>
+        </div>
       </div>
     </div>
-
-
-   <!--  <ul class="step-outline step-outline-3step">
-      <li class="step-item step-done">
-        <p class="step-count">1</p>
-        <p class="step-title">提交订单</p>
-        <p class="step-time">2016-03-29 18:33:21</p>
-      </li>
-      <li class="step-item step-done">
-        <p class="step-count">2</p>
-        <p class="step-title">接受服务</p>
-        <p class="step-time">开始 2016-03-29 18:33:21</p>
-        <p class="step-time">完成 2016-03-31 12:31:24</p>
-      </li>
-      <li class="step-item step-done step-item-last">
-        <p class="step-count">3</p>
-        <p class="step-title">确认服务完成</p>
-      </li>
-    </ul> -->
-
-    <!-- <div class="collect-prog">
-      <div class="start">
-        <p>开始</p>
-      </div>
-      <div class="milestone">
-        <p>集5张海报</p>
-        <p>获得1张礼品券</p>
-      </div>
-      <div class="milestone">
-        <p>集齐10张海报</p>
-        <p>获得2张礼品券</p>
-      </div>
-    </div> -->
 
     <div class="btn-wrap">
       <a href="" class="btn-get-voucher">领取兑换券</a>
@@ -139,199 +126,142 @@
 
 
 <script>
-$(function() {
-  // setUser('ohD2qjmtST3rseNCG7M9yTRLk4JA');
 
-  var host = '//mxd.tencent.com/weixin/160818-mbd/server/'
+// setUser('ohD2qjmtST3rseNCG7M9yTRLk4JA');
 
-  // if (getUrlPara('itemid')) {
-  //   $('#scenes-cont').show();
-  // } else {
-  //   $('#home-cont').show();
-  // }
+var host = '//mxd.tencent.com/weixin/160818-mbd/server/'
 
-  $(window).on('popstate', function() {
-    history.pushState({}, null, document.location.href);
-    document.title = 'MXD GO';
-    $('#open-succ').hide();
-    $('#open-failed').hide();
-    $('#gallery-wrap').hide();
-    $('#scenes-cont').show();
-  });
+if (getCookie().name) {
+  $('#scenes-cont').show();
+} else {
+  $('#home-cont').show();
+}
 
-  function setPosterCover(itemId) {
-    switch (parseInt(itemId)) {
-      case 1:
-        $('#poster-cover').attr('src', '../img/dida-cover.jpg');
-        break;
-      case 3:
-        $('#poster-cover').attr('src', '../img/xingyang-cover.png');
-        break;
-      case 4:
-        $('#poster-cover').attr('src', '../img/xingyang-cover.png');
-        break;
-      default:
-        break;
-    }
-  }
-
-  // set detail image
-  function setDetail(itemid) {
-    switch (parseInt(itemid)) {
-      case 1:
-        $('#btn-detail').attr('href', 'http://mxd.tencent.com/%E6%BB%B4%E7%AD%94-mxd-big-day-%E6%B7%B1%E5%9C%B3%E7%AC%AC9%E6%9C%9F');
-        break;
-      case 3:
-        $('#btn-detail').attr('href', 'http://mxd.tencent.com/%E6%BB%B4%E7%AD%94-mxd-big-day-%E6%B7%B1%E5%9C%B3%E7%AC%AC9%E6%9C%9F');
-        break;
-      case 4:
-        $('#btn-detail').attr('href', 'http://mxd.tencent.com/%E6%BB%B4%E7%AD%94-mxd-big-day-%E6%B7%B1%E5%9C%B3%E7%AC%AC9%E6%9C%9F');
-        break;
-      default:
-        break;
-    }
-  }
-
-  // set gallery list
-  function setGallery(items) {
-    for (var i = 0; i < items.length; i++) {
-      switch (parseInt(items[i].itemId)) {
-        case 1:
-          $('#poster-1')
-            .attr('href', './open.html?itemid=1&detail=1')
-            .children('img').attr('src', '../img/dida-cover.jpg');
-          break;
-        case 3:
-          $('#poster-3')
-            .attr('href', './open.html?itemid=3&detail=1')
-            .children('img').attr('src', '../img/xingyang-cover.png');
-          break;
-        case 4:
-          $('#poster-4')
-            .attr('href', './open.html?itemid=4&detail=1')
-            .children('img').attr('src', '../img/xingyang-cover.png');
-          break;
-        default:
-          break;
-      }
-    }
-  }
-
-  // hide home
-  // show scenes
-  $('#btn-go').on('click', function(e) {
-    e.stopPropagation();
-    $('#home-cont').hide();
-    $('#scenes-cont').show();
-  });
-
-  // find scroll
-  // show open scroll container
-  $('.scroll').on('click', function(e){
-    e.stopPropagation();
-    $('#scenes-cont').hide();
-    $('#open-cont').show();
-    var itemid = $(this).data('itemid');
-
-    var href = document.location.href;
-
-    if (href.search(/itemid=[\d]/) > -1) {
-      href = href.replace(/itemid=[\d]/, 'itemid=' + itemid);
-    } else {
-      href = href.search(/\?/) > -1 ?
-        href + '&itemid=' + itemid :
-        href + '?itemid=' + itemid;
-    }
-
-    history.pushState({itemid: itemid}, null, href);
-  });
-
-  // hide open container
-  // show open succeed or open failed
-  $('#open-scroll').on('click', function(e) {
-    e.stopPropagation();
-    var itemid = getUrlPara('itemid');
-    var position = undefined;
-    var time = undefined;
-    $.ajax({
-      url: host + 'ajax?user=true&openBox=true',
-      type: 'POST',
-      data: {
-        itemId: itemid,
-        position: position,
-        time: time
-      },
-      xhrFields: {
-        withCredentials: true
-      },
-      success: function(data, status, xhr) {
-        $('#open-cont').hide();
-        if (data == 1) {
-          setPosterCover(itemid);
-          document.title = '成功搜集一张海报';
-          $('#open-succ').show();
-          setDetail(itemid);
-        } else {
-          document.title = '没有发现海报';
-          $('#open-failed').show();
-        }
-      },
-      error: function(xhr, errorType, error){
-        console.log('error : ',error);
-      }
-    })
-  });
-
-  // go back scenes
-  // hide open failed
-  $('#btn-continue').on('click', function(e) {
-    e.stopPropagation();
-    history.pushState({}, null, document.location.href);
-    document.title = 'MXD GO';
-    $('#open-failed').hide();
-    $('#scenes-cont').show();
-  });
-
-  // go back scenes
-  // hide open succeed
-  $('#poster-close').on('click', function(e) {
-    e.stopPropagation();
-    history.pushState({}, null, document.location.href);
-    document.title = 'MXD GO';
-    $('#open-succ').hide();
-    $('#scenes-cont').show();
-  });
-
-  $('#gallery-entry').on('click', function(e){
-    e.stopPropagation();
-    $.ajax({
-      url: host + 'ajax?user=true&getAllItem=true',
-      type: 'GET',
-      data: {},
-      xhrFields: {
-        withCredentials: true
-      },
-      success: function(data, status, xhr) {
-        setGallery(data);
-      },
-      error: function(xhr, errorType, error){
-        console.log('error : ',error);
-      }
-    });
-    history.pushState({}, null, document.location.href);
-    $('#scenes-cont').hide();
-    $('#gallery-wrap').show();
-  });
-
-  // $('.poster-item').on('click', function(e){
-  //   e.stopPropagation();
-  //   var itemid = $(this).data('itemid');
-  //   setDetail(itemid);
-  //   $('#gallery-wrap').hide();
-  //   $('#detail-cont').show();
-  // });
-
+$(window).on('popstate', function() {
+  history.pushState({}, null, document.location.href);
+  document.title = 'MXD GO';
+  $('#open-succ').hide();
+  $('#open-failed').hide();
+  $('#gallery-wrap').hide();
+  $('#scenes-cont').show();
 });
+
+setColtProg(10);
+
+// hide home
+// show scenes
+$('#btn-go').on('click', function(e) {
+  e.stopPropagation();
+  $('#home-cont').hide();
+  $('#scenes-cont').show();
+});
+
+// find scroll
+// show open scroll container
+$('.scroll').on('click', function(e){
+  e.stopPropagation();
+  $('#scenes-cont').hide();
+  $('#open-cont').show();
+  var itemid = $(this).data('itemid');
+
+  var href = document.location.href;
+
+  if (href.search(/itemid=[\d]/) > -1) {
+    href = href.replace(/itemid=[\d]/, 'itemid=' + itemid);
+  } else {
+    href = href.search(/\?/) > -1 ?
+      href + '&itemid=' + itemid :
+      href + '?itemid=' + itemid;
+  }
+
+  history.pushState({itemid: itemid}, null, href);
+});
+
+// hide open container
+// show open succeed or open failed
+$('#open-scroll').on('click', function(e) {
+  e.stopPropagation();
+  var itemid = getUrlPara('itemid');
+  var position = undefined;
+  var time = undefined;
+  $.ajax({
+    url: host + 'ajax?user=true&openBox=true',
+    type: 'POST',
+    data: {
+      itemId: itemid,
+      position: position,
+      time: time
+    },
+    xhrFields: {
+      withCredentials: true
+    },
+    success: function(data, status, xhr) {
+      $('#open-cont').hide();
+      if (data == 1) {
+        setPosterCover(itemid);
+        document.title = '成功搜集一张海报';
+        $('#open-succ').show();
+        setDetail(itemid);
+      } else {
+        document.title = '没有发现海报';
+        $('#open-failed').show();
+      }
+    },
+    error: function(xhr, errorType, error){
+      console.log('error : ',error);
+    }
+  })
+});
+
+// go back scenes
+// hide open failed
+$('#btn-continue').on('click', function(e) {
+  e.stopPropagation();
+  history.pushState({}, null, document.location.href);
+  document.title = 'MXD GO';
+  $('#open-failed').hide();
+  $('#scenes-cont').show();
+});
+
+// go back scenes
+// hide open succeed
+$('#poster-close').on('click', function(e) {
+  e.stopPropagation();
+  history.pushState({}, null, document.location.href);
+  document.title = 'MXD GO';
+  $('#open-succ').hide();
+  $('#scenes-cont').show();
+});
+
+$('#gallery-entry').on('click', function(e){
+  e.stopPropagation();
+  $.ajax({
+    url: host + 'ajax?user=true&getAllItem=true',
+    type: 'GET',
+    data: {},
+    xhrFields: {
+      withCredentials: true
+    },
+    success: function(data, status, xhr) {
+      setGallery(data);
+    },
+    error: function(xhr, errorType, error){
+      console.log('error : ',error);
+    }
+  });
+  history.pushState({}, null, document.location.href);
+  $('#scenes-cont').hide();
+  $('#gallery-wrap').show();
+});
+
+// $('.poster-item').on('click', function(e){
+//   e.stopPropagation();
+//   var itemid = $(this).data('itemid');
+//   setDetail(itemid);
+//   $('#gallery-wrap').hide();
+//   $('#detail-cont').show();
+// });
+
 </script>
 </body>
 </html>

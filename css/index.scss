@@ -262,61 +262,66 @@ html, body {
 .scoreboard {
   background: #323137;
   width: 100%;
+  padding: 1rem 0 .3rem 0;
 }
 
 .prog-wrap {
-  padding-top: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  padding: 0 .4rem;
+  margin-bottom: .1rem;
+
   .start {
     flex: 0 0 .24rem;
     width: .24rem;
     height: .24rem;
     border-radius: 50%;
     background: #FF5E7C;
-  }
-  .bar {
-    flex: 0 1 38%;
-    height: .12rem;
-    border-top-right-radius: .6rem;
-    border-bottom-right-radius: .6rem;
     position: relative;
+    z-index: 2;
+  }
+
+  .bar {
+    width: 50%;
+    height: .15rem;
+    border-radius: 1rem;
+    position: relative;
+    z-index: 1;
     overflow: hidden;
     background: #fff;
-    margin-left: -.2rem;
 
-    &.no-mgl {
-      border-radius: .6rem;
+    margin-left: -.1rem;
+    &.second {
       margin-left: 0;
     }
 
-    &:before {
-      content: "";
+    .progress {
       position: absolute;
-      width: 80%;
+      width: 0;
       height: 100%;
-      border-radius: .6rem;
+      border-radius: .1rem;
       background: #FF5E7C;
       top: 0; left: 0;
     }
   }
 
   .indicator {
-    // flex: 0 0 .45rem;
     position: absolute;
-    width: .45rem;
-    height: .45rem;
+    width: .4rem;
+    height: .4rem;
     border-radius: 50%;
     color: #fff;
     background: #FF5E7C;
     text-align: center;
-    line-height: .45rem;
-    left: 100%;
-    transform: translateX(-100%);
+    line-height: .4rem;
+    top: 50%;
+    transform: translate(-100%, -50%);
     z-index: 5;
+    visibility: hidden;
   }
+
   .voucher {
     flex: 0 0 .43rem;
     width: .43rem;
@@ -334,5 +339,26 @@ html, body {
       background-repeat: no-repeat;
       background-position: centerl
     }
+  }
+}
+.text-wrap {
+  display: flex;
+  .first-bar {
+    width: 50%;
+  }
+  .second-bar {
+    width: 40%;
+  }
+  .start {
+    flex: 0 0 .8rem;
+    text-align: center;
+    font-size: .24rem;
+    color: #B2B2B2;
+  }
+  .milestone {
+    flex: 0 0 1.6rem;
+    text-align: center;
+    font-size: .24rem;
+    color: #B2B2B2;
   }
 }
