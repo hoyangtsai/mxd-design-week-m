@@ -21,9 +21,9 @@
   </div>
 
   <div id="scenes-cont" class="scenes-cont" style="display: none;">
-    <i id="scroll-1" class="scroll" style="top: 3rem; right: 2rem;"></i>
-    <i id="scroll-3" class="scroll" style="top: 4rem; right: 5rem;"></i>
-    <i id="scroll-4" class="scroll" style="top: 6rem; left: 2rem;"></i>
+    <i data-itemid="1" class="scroll" style="top: 3rem; right: 2rem;"></i>
+    <i data-itemid="3" class="scroll" style="top: 4rem; right: 5rem;"></i>
+    <i data-itemid="4" class="scroll" style="top: 6rem; left: 2rem;"></i>
     <span id="gallery-entry" class="gallery-entry"></span>
   </div>
 
@@ -74,21 +74,21 @@
     </div>
     <div class="poster-wall">
       <div class="poster-row">
-        <div id="poster-1" id="poster-item" class="poster-item">
+        <div date-itemid="1" id="poster-item" class="poster-item">
           <p>1</p>
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
         </div>
-        <div id="poster-2" id="poster-item" class="poster-item">
+        <div date-itemid="2" id="poster-item" class="poster-item">
           <p>2</p>
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
         </div>
       </div>
       <div class="poster-row">
-        <div id="poster-3" id="poster-item" class="poster-item">
+        <div date-itemid="3" id="poster-item" class="poster-item">
           <p>3</p>
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
         </div>
-        <div id="poster-4" id="poster-item" class="poster-item">
+        <div date-itemid="4" id="poster-item" class="poster-item">
           <p>4</p>
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
         </div>
@@ -188,8 +188,14 @@ $(function() {
     e.stopPropagation();
     $('#scenes-cont').hide();
     $('#open-cont').show();
-    var itemid = this.id.slice(-1);
-    history.pushState({itemid: itemid}, null, '?itemid=' + itemid);
+    var itemid = $(this).data('itemid');
+
+    var href = document.location.href;
+    href = href.search(/itemid=/g) == -1 ?
+      href + '?itemid=' + itemid :
+      href.replace('itemid=' + getUrlPara('itemid'), 'itemid=' + itemid);
+
+    history.pushState({itemid: itemid}, null, href);
   });
 
   // hide open container
@@ -231,7 +237,7 @@ $(function() {
   // hide open failed
   $('#btn-continue').on('click', function(e) {
     e.stopPropagation();
-    history.pushState({}, null, './index.html');
+    history.pushState({}, null, document.location.href);
     document.title = 'MXD GO';
     $('#open-failed').hide();
     $('#scenes-cont').show();
@@ -241,7 +247,7 @@ $(function() {
   // hide open succeed
   $('#poster-close').on('click', function(e) {
     e.stopPropagation();
-    history.pushState({}, null, './index.html');
+    history.pushState({}, null, document.location.href);
     document.title = 'MXD GO';
     $('#open-succ').hide();
     $('#scenes-cont').show();
@@ -272,14 +278,14 @@ $(function() {
         console.log('error : ',error);
       }
     });
-    history.pushState({}, null, './index.html');
+    history.pushState({}, null, document.location.href);
     $('#scenes-cont').hide();
     $('#gallery-wrap').show();
   });
 
   $('.poster-item').on('click', function(e){
     e.stopPropagation();
-    var itemid = this.id.slice(-1);
+    var itemid = $(this).data('itemid');
     setDetailImg(itemid);
     $('#gallery-wrap').hide();
     $('#detail-cont').show();

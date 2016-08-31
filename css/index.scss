@@ -25,7 +25,8 @@ html, body {
   flex: 0 0 .96rem;
   width: 5.63rem;
   height: .96rem;
-  @include sprite("../slice/cover-title.png", index);
+  background: url("../slice/cover-title.png") no-repeat;
+  background-size: contain;
   margin-bottom: 4.64rem;
 }
 
@@ -36,8 +37,9 @@ html, body {
     vertical-align: top;
     width: .44rem;
     height: .44rem;
-    @include sprite("../slice/icon-bluetooth.png", index);
+    @include base64("../slice/icon-bluetooth.png");
     margin-right: .23rem;
+    background-size: contain;
   }
   font-size: .33rem;
   color: #fff;
@@ -61,9 +63,13 @@ html, body {
   flex: 0 0 .58rem;
   width: 4.39rem;
   height: .58rem;
-  @include sprite("../slice/copyright.png", index);
   position: absolute;
   bottom: .24rem;
+  width: 100%;
+  @include base64("../slice/copyright.png");
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-position: center;
 }
 
 .btn-wrap {
