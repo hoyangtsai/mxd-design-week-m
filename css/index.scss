@@ -87,7 +87,6 @@ html, body {
   font-size: .3rem;
   text-align: center;
   line-height: .65rem;
-  margin-bottom: .3rem;
 }
 
 .poster-wall {
@@ -220,6 +219,9 @@ html, body {
 .gallery-wrap {
   width: 100%;
   height: 100%;
+  .btn-wrap {
+    padding: .3rem 0;
+  }
 }
 
 .scenes-cont {
