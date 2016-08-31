@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="page-wrap">
-  <div id="home-cont" class="home-cont" style="">
+  <div id="home-cont" class="home-cont" style="display: none;">
     <div class="cover-title"></div>
     <div class="notice">开启蓝牙，最佳体验</div>
     <span href="" id="btn-go" class="btn-go">GO !</span>
@@ -60,36 +60,76 @@
       <img id="poster-cover" class="poster-cover" src="" alt="">
     </div>
     <div class="btn-wrap">
-      <a id="btn-detail" class="page-btn" href="#">活动详情</a>
+      <a id="btn-detail" class="page-btn" href="">活动详情</a>
     </div>
   </div>
 
-  <div id="detail-cont" class="detail-cont" style="display: none;">
+  <!-- <div id="detail-cont" class="detail-cont" style="display: none;">
     <img id="detail-img" src="" alt="">
-  </div>
+  </div> -->
 
-  <div id="gallery-wrap" class="gallery-wrap" style="display: none;">
+  <div id="gallery-wrap" class="gallery-wrap" style="">
+    <div class="scoreboard">
+      <div class="prog-wrap">
+        <span class="start"></span>
+        <span class="bar"></span>
+        <!-- <span class="indicator">1</span> -->
+        <span class="voucher filled"></span>
+        <span class="bar no-mgl"></span>
+        <span class="voucher blank"></span>
+      </div>
+    </div>
+
+
+   <!--  <ul class="step-outline step-outline-3step">
+      <li class="step-item step-done">
+        <p class="step-count">1</p>
+        <p class="step-title">提交订单</p>
+        <p class="step-time">2016-03-29 18:33:21</p>
+      </li>
+      <li class="step-item step-done">
+        <p class="step-count">2</p>
+        <p class="step-title">接受服务</p>
+        <p class="step-time">开始 2016-03-29 18:33:21</p>
+        <p class="step-time">完成 2016-03-31 12:31:24</p>
+      </li>
+      <li class="step-item step-done step-item-last">
+        <p class="step-count">3</p>
+        <p class="step-title">确认服务完成</p>
+      </li>
+    </ul> -->
+
+    <!-- <div class="collect-prog">
+      <div class="start">
+        <p>开始</p>
+      </div>
+      <div class="milestone">
+        <p>集5张海报</p>
+        <p>获得1张礼品券</p>
+      </div>
+      <div class="milestone">
+        <p>集齐10张海报</p>
+        <p>获得2张礼品券</p>
+      </div>
+    </div> -->
+
     <div class="btn-wrap">
       <a href="" class="btn-get-voucher">领取兑换券</a>
     </div>
     <div class="poster-wall">
       <div class="poster-row">
         <div date-itemid="1" id="poster-item" class="poster-item">
-          <p>1</p>
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
         </div>
         <div date-itemid="2" id="poster-item" class="poster-item">
-          <p>2</p>
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
         </div>
       </div>
       <div class="poster-row">
         <div date-itemid="3" id="poster-item" class="poster-item">
-          <p>3</p>
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
         </div>
         <div date-itemid="4" id="poster-item" class="poster-item">
-          <p>4</p>
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
         </div>
       </div>
@@ -104,12 +144,18 @@ $(function() {
 
   var host = '//mxd.tencent.com/weixin/160818-mbd/server/'
 
+  // if (getUrlPara('itemid')) {
+  //   $('#scenes-cont').show();
+  // } else {
+  //   $('#home-cont').show();
+  // }
+
   $(window).on('popstate', function() {
-    history.pushState({}, null, './index.html');
+    history.pushState({}, null, document.location.href);
     document.title = 'MXD GO';
     $('#open-succ').hide();
     $('#open-failed').hide();
-    $('#detail-cont').hide();
+    $('#gallery-wrap').hide();
     $('#scenes-cont').show();
   });
 
@@ -133,16 +179,13 @@ $(function() {
   function setDetail(itemid) {
     switch (parseInt(itemid)) {
       case 1:
-        document.title = '深圳第十一期 醒仰'
-        $('#detail-img').attr('src', '../img/xingyang.jpg');
+        $('#btn-detail').attr('href', 'http://mxd.tencent.com/%E6%BB%B4%E7%AD%94-mxd-big-day-%E6%B7%B1%E5%9C%B3%E7%AC%AC9%E6%9C%9F');
         break;
       case 3:
-        document.title = '深圳第十一期 醒仰'
-        $('#detail-img').attr('src', '../img/xingyang.jpg');
+        $('#btn-detail').attr('href', 'http://mxd.tencent.com/%E6%BB%B4%E7%AD%94-mxd-big-day-%E6%B7%B1%E5%9C%B3%E7%AC%AC9%E6%9C%9F');
         break;
       case 4:
-        document.title = '深圳第十一期 醒仰'
-        $('#detail-img').attr('src', '../img/xingyang.jpg');
+        $('#btn-detail').attr('href', 'http://mxd.tencent.com/%E6%BB%B4%E7%AD%94-mxd-big-day-%E6%B7%B1%E5%9C%B3%E7%AC%AC9%E6%9C%9F');
         break;
       default:
         break;
@@ -191,12 +234,13 @@ $(function() {
     var itemid = $(this).data('itemid');
 
     var href = document.location.href;
-    if (href.search(/itemid=/) == -1) {
-      href = href.search(/\?/) == -1 ?
-            href + '?itemid=' + itemid :
-            href + '&itemid=' + itemid;
+
+    if (href.search(/itemid=[\d]/) > -1) {
+      href = href.replace(/itemid=[\d]/, 'itemid=' + itemid);
     } else {
-      href = href.replace('itemid=' + getUrlPara('itemid'), 'itemid=' + itemid);
+      href = href.search(/\?/) > -1 ?
+        href + '&itemid=' + itemid :
+        href + '?itemid=' + itemid;
     }
 
     history.pushState({itemid: itemid}, null, href);
@@ -226,6 +270,7 @@ $(function() {
           setPosterCover(itemid);
           document.title = '成功搜集一张海报';
           $('#open-succ').show();
+          setDetail(itemid);
         } else {
           document.title = '没有发现海报';
           $('#open-failed').show();
@@ -257,15 +302,6 @@ $(function() {
     $('#scenes-cont').show();
   });
 
-
-  $('#btn-detail').on('click', function(e) {
-    e.stopPropagation();
-    var itemid = getUrlPara('itemid');
-    setDetail(itemid);
-    $('#open-succ').hide();
-    $('#detail-cont').show();
-  });
-
   $('#gallery-entry').on('click', function(e){
     e.stopPropagation();
     $.ajax({
@@ -287,13 +323,13 @@ $(function() {
     $('#gallery-wrap').show();
   });
 
-  $('.poster-item').on('click', function(e){
-    e.stopPropagation();
-    var itemid = $(this).data('itemid');
-    setDetail(itemid);
-    $('#gallery-wrap').hide();
-    $('#detail-cont').show();
-  });
+  // $('.poster-item').on('click', function(e){
+  //   e.stopPropagation();
+  //   var itemid = $(this).data('itemid');
+  //   setDetail(itemid);
+  //   $('#gallery-wrap').hide();
+  //   $('#detail-cont').show();
+  // });
 
 });
 </script>
