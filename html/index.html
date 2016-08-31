@@ -60,7 +60,7 @@
       <img id="poster-cover" class="poster-cover" src="" alt="">
     </div>
     <div class="btn-wrap">
-      <span id="btn-detail" class="page-btn" href="#">活动详情</span>
+      <a id="btn-detail" class="page-btn" href="#">活动详情</a>
     </div>
   </div>
 
@@ -130,7 +130,7 @@ $(function() {
   }
 
   // set detail image
-  function setDetailImg(itemid) {
+  function setDetail(itemid) {
     switch (parseInt(itemid)) {
       case 1:
         document.title = '深圳第十一期 醒仰'
@@ -191,9 +191,13 @@ $(function() {
     var itemid = $(this).data('itemid');
 
     var href = document.location.href;
-    href = href.search(/itemid=/g) == -1 ?
-      href + '?itemid=' + itemid :
-      href.replace('itemid=' + getUrlPara('itemid'), 'itemid=' + itemid);
+    if (href.search(/itemid=/) == -1) {
+      href = href.search(/\?/) == -1 ?
+            href + '?itemid=' + itemid :
+            href + '&itemid=' + itemid;
+    } else {
+      href = href.replace('itemid=' + getUrlPara('itemid'), 'itemid=' + itemid);
+    }
 
     history.pushState({itemid: itemid}, null, href);
   });
@@ -257,7 +261,7 @@ $(function() {
   $('#btn-detail').on('click', function(e) {
     e.stopPropagation();
     var itemid = getUrlPara('itemid');
-    setDetailImg(itemid);
+    setDetail(itemid);
     $('#open-succ').hide();
     $('#detail-cont').show();
   });
@@ -286,7 +290,7 @@ $(function() {
   $('.poster-item').on('click', function(e){
     e.stopPropagation();
     var itemid = $(this).data('itemid');
-    setDetailImg(itemid);
+    setDetail(itemid);
     $('#gallery-wrap').hide();
     $('#detail-cont').show();
   });
