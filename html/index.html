@@ -10,18 +10,46 @@
   <script src="../js/grid.js"></script>
   <script src="../js/zepto.min.js"></script>
   <script src="../js/g.js"></script>
-  <script src="../js/path.min.js"></script>
 </head>
 <body>
 <div class="page-wrap">
-  <div id="home-cont" class="home-cont" style="display: none;">
+  <div id="home-cont" class="home-cont" style="">
     <div class="cover-title"></div>
-    <div class="notice">开启蓝牙，最佳体验</div>
-    <span id="btn-go" class="btn-go">GO !</span>
+    <div class="cover-bottom" style="">
+      <div class="notice">开启蓝牙，最佳体验</div>
+      <span id="btn-go" class="btn-go">GO!</span>
+    </div>
+    <div class="loading-bal" style="display: none;">
+      <p>Loading...</p>
+    </div>
     <div class="copyright"></div>
   </div>
 
+  <div class="rule-cont" style="display: none;">
+    <div class="rule-box">
+      <h3 class="rule-title">规则说明</h3>
+      <ul class="rule-list">
+        <li class="rule-item">
+          <span class="rule-no">1</span>
+          <p class="rule-exp">您可以在展位内四处走走会有卷轴随机出现</p>
+        </li>
+        <li class="rule-item">
+          <span class="rule-no">2</span>
+          <p class="rule-exp">点击打开卷轴有几率收集一张精美海报</p>
+        </li>
+        <li class="rule-item">
+          <span class="rule-no">3</span>
+          <p class="rule-exp">收集一定数量的海报后可找工作人员兑换奖品</p>
+        </li>
+      </ul>
+      <div class="btn-rule-conf">
+        <p>我知道了</p>
+      </div>
+    </div>
+  </div>
+
   <div id="scenes-cont" class="scenes-cont" style="display: none;">
+    <canvas id="canvas" class="canvas" width="720" height="1280"></canvas>
     <i data-itemid="1" class="scroll" style="top: 3rem; right: 2rem;"></i>
     <i data-itemid="3" class="scroll" style="top: 4rem; right: 5rem;"></i>
     <i data-itemid="4" class="scroll" style="top: 6rem; left: 2rem;"></i>
@@ -58,7 +86,7 @@
     </div>
     <div class="poster-cont">
       <span id="poster-close" class="poster-close"></span>
-      <img id="poster-cover" class="poster-cover" src="" alt="">
+      <img id="poster-cover" class="poster-cover" src="//3gimg.qq.com/mig-web/2016/160831/20140515-kui.jpg" alt="">
     </div>
     <div class="btn-wrap">
       <a id="btn-detail" class="page-btn" href="">活动详情</a>
@@ -72,36 +100,35 @@
   <div id="gallery-wrap" class="gallery-wrap" style="display: none;">
     <div class="scoreboard">
       <div class="prog-wrap">
-        <span class="indicator">1</span>
-        <span class="start"></span>
+        <span class="indicator">4海报</span>
+        <span class="start">0</span>
         <div class="bar first">
           <span class="progress"></span>
         </div>
-        <span id="voucher-1" class="voucher blank"></span>
+        <span id="voucher-1" class="voucher">5</span>
         <div class="bar second">
           <span class="progress"></span>
         </div>
-        <span id="voucher-2" class="voucher blank"></span>
+        <span id="voucher-2" class="voucher">10</span>
       </div>
       <div class="text-wrap">
         <div class="start">
-          <p>开始</p>
+          <p>收集海报</p>
+          <p>得礼品劵</p>
         </div>
         <div class="first-bar"></div>
         <div class="milestone">
-          <p>集5张海报</p>
-          <p>获得1张礼品券</p>
+          <p>礼品券×1</p>
         </div>
         <div class="second-bar"></div>
         <div class="milestone">
-          <p>集10张海报</p>
-          <p>获得1张礼品券</p>
+          <p>礼品券×2</p>
         </div>
       </div>
     </div>
 
-    <div class="btn-wrap">
-      <a href="" class="btn-get-voucher">领取兑换券</a>
+    <div class="poster-exp">
+      <p>请到<b>微信卡包</b>里查看获得的<b>礼品劵</b></p>
     </div>
     <div class="poster-wall">
       <div class="poster-row">
@@ -137,13 +164,11 @@
 
 // setUser('ohD2qjmtST3rseNCG7M9yTRLk4JA');
 
-var host = '//mxd.tencent.com/weixin/160818-mbd/server/'
-
-if (getCookie().name) {
-  $('#scenes-cont').show();
-} else {
-  $('#home-cont').show();
-}
+// if (getCookie().name) {
+//   $('#scenes-cont').show();
+// } else {
+//   $('#home-cont').show();
+// }
 
 $(window).on('popstate', function() {
   history.pushState({}, null, document.location.href);
@@ -154,14 +179,16 @@ $(window).on('popstate', function() {
   $('#scenes-cont').show();
 });
 
-setColtProg(10);
-
 // hide home
 // show scenes
 $('#btn-go').on('click', function(e) {
   e.stopPropagation();
-  $('#home-cont').hide();
-  $('#scenes-cont').show();
+  $('#home-cont').children('.cover-bottom').hide();
+  $('#home-cont').children('.loading-bal').show();
+  setTimeout(function() {
+    $('#home-cont').hide()
+   $('#scenes-cont').show()
+  }, 2000)
 });
 
 // find scroll

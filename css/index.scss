@@ -5,6 +5,14 @@ html, body {
   position: relative;
 }
 
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .page-wrap {
   height: 100%;
   position: relative;
@@ -19,6 +27,84 @@ html, body {
   background-size: cover;
   padding-top: 2.98rem;
   position: relative;
+
+  .notice {
+    &:before {
+      content: "";
+      display: inline-block;
+      vertical-align: top;
+      width: .44rem;
+      height: .44rem;
+      @include base64("../slice/icon-bluetooth.png");
+      margin-right: .23rem;
+      background-size: contain;
+    }
+    font-family: PingFangSC-Light, sans-serif;
+    font-size: .33rem;
+    color: #fff;
+    margin-bottom: .2rem;
+    text-align: center;
+  }
+}
+
+.rule-box {
+  position: absolute;
+  width: 5.1rem;
+  background: rgba(#000, 0.6);
+  border-radius: .2rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding-top: .55rem;
+  .rule-title {
+    color: #fff;
+    font-size: .42rem;
+    line-height: 1.5;
+    margin-bottom: .5rem;
+    text-align: center;
+  }
+  .rule-list {
+    padding: 0 .52rem;
+  }
+  .rule-item {
+    color: #fff;
+    margin-bottom: .45rem;
+
+    .rule-no {
+      &:before {
+        content: "";
+        display: inline-block;
+        vertical-align: middle;
+        height: .74rem;
+      }
+      display: inline-block;
+      vertical-align: middle;
+      font-size: .4rem;
+      border-radius: 50%;
+      text-align: center;
+      border: 1px solid #fff;
+      width: .72rem;
+      height: .72rem;
+      margin-right: .14rem;
+    }
+
+    .rule-exp {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: .28rem;
+      width: 3.1rem;
+      word-break: break-word;
+    }
+  }
+
+  .btn-rule-conf {
+    border-top: 1px solid #fff;
+    padding: .45rem 0;
+    p {
+      color: #fff;
+      text-align: center;
+    }
+  }
 }
 
 .cover-title {
@@ -30,24 +116,9 @@ html, body {
   margin-bottom: 4.64rem;
 }
 
-.notice {
-  &:before {
-    content: "";
-    display: inline-block;
-    vertical-align: top;
-    width: .44rem;
-    height: .44rem;
-    @include base64("../slice/icon-bluetooth.png");
-    margin-right: .23rem;
-    background-size: contain;
-  }
-  font-size: .33rem;
-  color: #fff;
-  line-height: .44rem;
-  margin-bottom: .2rem;
-}
 
 .btn-go {
+  display: inline-block;
   flex: 0 0 .82rem;
   width: 5.9rem;
   height: .82rem;
@@ -57,6 +128,8 @@ html, body {
   text-align: center;
   line-height: .82rem;
   font-weight: bold;
+  font-size: .4rem;
+  letter-spacing: .1rem;
 }
 
 .copyright {
@@ -136,18 +209,62 @@ html, body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  &:before {
-    content: "";
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    filter: blur(5px);
-    z-index: -10;
+  position: relative;
+
+  #seal-scroll {
+    padding-top: 2.65rem;
+  }
+}
+
+.open-failed {
+  height: 100%;
+  position: relative;
+  .flex-row__centered {
+    padding-top: 3rem;
+  }
+  .empty-scroll {
+    width: 4.72rem;
+    height: 1.83rem;
+  }
+}
+
+.open-succ {
+
+  .poster-cont {
+    width: 4.85rem;
+    height: 6.58rem;
+    position: relative;
+    margin: 0 auto;
+    padding-top: .6rem;
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      position: relative;
+      border-radius: .1rem;
+      box-shadow: 0px 7px 5px rgba(#000, .15);
+    }
+  }
+
+  .poster-close {
+    position: absolute;
+    width: .5rem;
+    height: .5rem;
+    @include base64("../slice/close.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #fff;
+    background-size: 50%;
+    border-radius: 50%;
+    right: -.25rem;
+    top: .35rem;
+    z-index: 5;
+    box-shadow: 2px 2px 3px rgba(#000, .5);
   }
 }
 
 .page-btn {
-  display: inline-block;
+  position: absolute;
   width: 3rem;  height: .9rem;
   background: rgba(0, 0, 0, .7);
   border-radius: .45rem;
@@ -155,8 +272,10 @@ html, body {
   font-size: .42rem;
   text-align: center;
   line-height: .9rem;
+  bottom: 1.45rem;
+  left: 50%;
+  margin-left: -1.5rem;
 }
-
 
 .title-wrap {
   padding-top: 1.56rem;
@@ -172,41 +291,6 @@ html, body {
   font-size: .45rem;
 }
 
-.poster-cont {
-  width: 4.85rem;
-  height: 6.58rem;
-  position: relative;
-  margin: 0 auto;
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
-    position: relative;
-    border-radius: .1rem;
-    box-shadow: 0px 7px 5px rgba(#000, .15);
-  }
-}
-
-.empty-scroll {
-  width: 4.72rem;
-  height: 1.83rem;
-}
-
-.poster-close {
-  position: absolute;
-  width: .5rem;
-  height: .5rem;
-  @include base64("../slice/close.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: #fff;
-  background-size: 50%;
-  border-radius: 50%;
-  right: -.25rem;
-  top: -.25rem;
-  z-index: 5;
-  box-shadow: 2px 2px 3px rgba(#000, .5);
-}
 
 .detail-cont {
   img {
@@ -217,10 +301,17 @@ html, body {
 }
 
 .gallery-wrap {
-  width: 100%;
-  height: 100%;
-  .btn-wrap {
-    padding: .3rem 0;
+  background: url("../img/poster-bg.png");
+  background-size: cover;
+
+  .poster-exp {
+    font-size: .28rem;
+    color: #333333;
+    text-align: center;
+    margin: .26rem 0 .46rem 0;
+    b {
+      font-weight: bold;
+    }
   }
 }
 
@@ -262,7 +353,7 @@ html, body {
 }
 
 .scoreboard {
-  background: #323137;
+  background: rgba(#333333, .8);
   width: 100%;
   padding: 1rem 0 .3rem 0;
 }
@@ -273,31 +364,41 @@ html, body {
   align-items: center;
   position: relative;
   padding: 0 .4rem;
-  margin-bottom: .1rem;
+  margin-bottom: .25rem;
 
-  .start {
-    flex: 0 0 .24rem;
-    width: .24rem;
-    height: .24rem;
-    border-radius: 50%;
-    background: #FF5E7C;
+  .start, .voucher {
+    flex: 0 0 .54rem;
+    width: .54rem;
+    height: .35rem;
+    border-radius: .18rem;
     position: relative;
     z-index: 2;
+    color: #fff;
+    text-align: center;
+    font-size: .24rem;
+  }
+
+  .start {
+    background: #ff5e7c;
+  }
+
+  .voucher {
+    background: #cccccc;
+    color: #2f3437;
+    &.filled {
+      background: #ff5e7c;
+      color: #fff;
+    }
   }
 
   .bar {
     width: 50%;
-    height: .15rem;
+    height: .1rem;
     border-radius: 1rem;
     position: relative;
     z-index: 1;
     overflow: hidden;
-    background: #fff;
-
-    margin-left: -.1rem;
-    &.second {
-      margin-left: 0;
-    }
+    background: #cccccc;
 
     .progress {
       position: absolute;
@@ -311,56 +412,78 @@ html, body {
 
   .indicator {
     position: absolute;
-    width: .4rem;
-    height: .4rem;
-    border-radius: 50%;
+    width: .87rem;
+    height: .47rem;
+    border-radius: 18rem;
     color: #fff;
     background: #FF5E7C;
     text-align: center;
-    line-height: .4rem;
+    line-height: .47rem;
     top: 50%;
     transform: translate(-100%, -50%);
     z-index: 5;
     visibility: hidden;
-  }
-
-  .voucher {
-    flex: 0 0 .43rem;
-    width: .43rem;
-    height: .33rem;
-    margin: 0 .1rem;
-    &.blank {
-      @include base64("../slice/voucher-blank.png");
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: centerl
-    }
-    &.filled {
-      @include base64("../slice/voucher-filled.png");
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: centerl
-    }
+    font-size: .24rem;
   }
 }
+
 .text-wrap {
   display: flex;
+  color: #fff;
+  text-align: center;
+  font-size: .24rem;
+  align-items: center;
+  padding: 0 .2rem;
   .first-bar {
-    width: 50%;
+    width: 60%;
   }
   .second-bar {
-    width: 40%;
+    width: 50%;
   }
   .start {
-    flex: 0 0 .8rem;
-    text-align: center;
-    font-size: .24rem;
-    color: #B2B2B2;
+    flex: 0 0 .96rem;
   }
   .milestone {
-    flex: 0 0 1.6rem;
-    text-align: center;
-    font-size: .24rem;
-    color: #B2B2B2;
+    flex: 0 0 5em;
   }
 }
+
+@keyframes loadingAmt {
+  0% {
+    width: 2.84rem;
+  }
+  50% {
+    width: 3.6rem;
+  }
+  100% {
+    width: 2.84rem;
+  }
+}
+
+.loading-bal {
+  &:before {
+    content: "";
+    position: absolute;
+    border-bottom: .12rem solid rgba(#000, 0.3);
+    border-left: .12rem solid transparent;
+    border-right: .12rem solid transparent;
+    bottom: 0;
+    left: -.1rem;
+    transform: rotate(50deg);
+  }
+  position: absolute;
+  width: 2.84rem;
+  height: .51rem;
+  background: rgba(#000, .3);
+  background-blend-mode: darken;
+  border-radius: .25rem;
+  bottom: 3.1rem;
+  animation: loadingAmt 1s ease-in infinite;
+  p {
+    color: #fff;
+    text-align: center;
+    font-size: .24rem;
+    line-height: .51rem;
+  }
+}
+
