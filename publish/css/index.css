@@ -540,6 +540,9 @@ html, body {
   bottom: 3.1rem;
   -webkit-animation: loadingAmt 1s ease-in infinite;
           animation: loadingAmt 1s ease-in infinite;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
 
 .loading-bal:before {

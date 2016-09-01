@@ -479,6 +479,8 @@ html, body {
   border-radius: .25rem;
   bottom: 3.1rem;
   animation: loadingAmt 1s ease-in infinite;
+  left: 0; right: 0;
+  margin: 0 auto;
   p {
     color: #fff;
     text-align: center;
