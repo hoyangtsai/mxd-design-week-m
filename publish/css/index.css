@@ -196,17 +196,22 @@ html, body {
   -webkit-box-pack: center;
   -webkit-justify-content: center;
           justify-content: center;
-  margin-bottom: .3rem;
+  margin-bottom: .4rem;
 }
 
 .poster-wall .poster-item {
   display: inline-block;
-  width: 3.27rem;
-  height: 4.36rem;
-  margin-left: .3rem;
+  width: 3.4rem;
+  height: 2.32rem;
+  margin-left: .2rem;
   background: rgba(50, 49, 55, 0.5) url("../slice/poster-locker.png") no-repeat center;
+  background-size: 25%;
   border-radius: .19rem;
   position: relative;
+}
+
+.poster-wall .poster-item:first-child {
+  margin-left: 0;
 }
 
 .poster-wall .poster-item p {
@@ -217,10 +222,6 @@ html, body {
   width: 100%;
   text-align: center;
   line-height: 4.36rem;
-}
-
-.poster-wall .poster-item:first-child {
-  margin-left: 0;
 }
 
 .poster-wall .poster-item img {
