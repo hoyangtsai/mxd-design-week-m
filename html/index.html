@@ -25,7 +25,7 @@
     <div class="copyright"></div>
   </div>
 
-  <div class="rule-cont" style="display: none;">
+  <div id="rule-cont" class="rule-cont" style="display: none;">
     <div class="rule-box">
       <h3 class="rule-title">规则说明</h3>
       <ul class="rule-list">
@@ -42,7 +42,7 @@
           <p class="rule-exp">收集一定数量的海报后可找工作人员兑换奖品</p>
         </li>
       </ul>
-      <div class="btn-rule-conf">
+      <div id="btn-rule-conf" class="btn-rule-conf">
         <p>我知道了</p>
       </div>
     </div>
@@ -58,10 +58,12 @@
 
   <div id="open-cont" class="open-cont" style="display: none;">
     <div class="title-wrap">
-      <h3 class="title__centered">发现卷轴 打开看看</h3>
+      <h3 class="title-scroll-found"></h3>
     </div>
     <div class="flex-row__centered">
-      <img id="seal-scroll" src="../img/scroll.png" alt="">
+      <div class="seal-scroll-wrap">
+        <img class="seal-scroll" src="../img/scroll.png" alt="">
+      </div>
     </div>
     <div class="btn-wrap">
       <span id="open-scroll" class="page-btn">打开</span>
@@ -70,25 +72,26 @@
 
   <div id="open-failed" class="open-failed" style="display: none;">
     <div class="title-wrap">
-      <h3 class="title__centered">没有发现海报</h3>
+      <h3 class="title-scroll-not-found"></h3>
     </div>
     <div class="flex-row__centered">
       <img class="empty-scroll" src="../img/empty-scroll.png" alt="">
     </div>
     <div class="btn-wrap">
-      <span id="btn-continue" class="btn-continue page-btn">继续</span>
+      <span id="btn-continue" class="btn-continue page-btn">回到游戏</span>
     </div>
   </div>
 
   <div id="open-succ" class="open-succ" style="display: none;">
     <div class="title-wrap">
-      <h3 class="title__centered">成功搜集一张海报</h3>
+      <h3 class="title-get-poster"></h3>
     </div>
     <div class="poster-cont">
-      <img id="poster-cover" class="poster-cover" src="//3gimg.qq.com/mig-web/2016/160831/20140515-kui.jpg" alt="">
+      <img id="poster-cover" class="poster-cover" src="http://3gimg.qq.com/mig-web/2016/160831/20140515-kui.jpg" alt="">
     </div>
     <div class="btn-wrap">
-      <span id="btn-continue" class="btn-continue page-btn">继续</span>
+      <a href="javascript:;" id="btn-detail" class="succ-btn">去看看</a>
+      <span class="btn-continue succ-btn">回到游戏</span>
     </div>
   </div>
 
@@ -121,50 +124,51 @@
         </div>
       </div>
     </div>
-
-    <div class="poster-exp">
-      <p>请到<b>微信卡包</b>里查看获得的<b>礼品劵</b></p>
-    </div>
-    <div class="poster-wall">
-      <div class="poster-row">
-        <a href="javascript:;" id="poster-1" class="poster-item">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
-        </a>
-        <a href="javascript:;" id="poster-2" class="poster-item">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
-        </a>
+    <div class="poster-wrap">
+      <div class="poster-exp">
+        <h3 class="title-gallery-voucher"></h3>
       </div>
-      <div class="poster-row">
-        <a href="javascript:;" id="poster-3" class="poster-item">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
-        </a>
-        <a href="javascript:;" id="poster-4" class="poster-item">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
-        </a>
-      </div>
-      <div class="poster-row">
-        <a href="javascript:;" id="poster-5" class="poster-item">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
-        </a>
-        <a href="javascript:;" id="poster-6" class="poster-item">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
-        </a>
-      </div>
-      <div class="poster-row">
-        <a href="javascript:;" id="poster-7" class="poster-item">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
-        </a>
-        <a href="javascript:;" id="poster-8" class="poster-item">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
-        </a>
-      </div>
-      <div class="poster-row">
-        <a href="javascript:;" id="poster-9" class="poster-item">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
-        </a>
-        <a href="javascript:;" id="poster-10" class="poster-item">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
-        </a>
+      <div class="poster-wall">
+        <div class="poster-row">
+          <a href="javascript:;" id="poster-1" class="poster-item">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+          </a>
+          <a href="javascript:;" id="poster-2" class="poster-item">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+          </a>
+        </div>
+        <div class="poster-row">
+          <a href="javascript:;" id="poster-3" class="poster-item">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+          </a>
+          <a href="javascript:;" id="poster-4" class="poster-item">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+          </a>
+        </div>
+        <div class="poster-row">
+          <a href="javascript:;" id="poster-5" class="poster-item">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+          </a>
+          <a href="javascript:;" id="poster-6" class="poster-item">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+          </a>
+        </div>
+        <div class="poster-row">
+          <a href="javascript:;" id="poster-7" class="poster-item">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+          </a>
+          <a href="javascript:;" id="poster-8" class="poster-item">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+          </a>
+        </div>
+        <div class="poster-row">
+          <a href="javascript:;" id="poster-9" class="poster-item">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+          </a>
+          <a href="javascript:;" id="poster-10" class="poster-item">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -174,12 +178,6 @@
 <script>
 
 // setUser('ohD2qjmtST3rseNCG7M9yTRLk4JA');
-
-// if (getCookie().name) {
-//   $('#scenes-cont').show();
-// } else {
-//   $('#home-cont').show();
-// }
 
 $(window).on('popstate', function() {
   history.pushState({}, null, document.location.href);
@@ -191,15 +189,21 @@ $(window).on('popstate', function() {
 });
 
 // hide home
-// show scenes
 $('#btn-go').on('click', function(e) {
   e.stopPropagation();
   $('#home-cont').children('.cover-bottom').hide();
   $('#home-cont').children('.loading-bal').show();
   setTimeout(function() {
     $('#home-cont').hide()
-   $('#scenes-cont').show()
+    $('#rule-cont').show()
   }, 2000)
+});
+
+// show scenes
+$('#btn-rule-conf').on('click', function(e) {
+  e.stopPropagation();
+  $('#rule-cont').hide()
+  $('#scenes-cont').show()
 });
 
 // find scroll
@@ -247,7 +251,7 @@ $('#open-scroll').on('click', function(e) {
         setPosterCover(itemid);
         document.title = '成功搜集一张海报';
         $('#open-succ').show();
-        // setDetail(itemid);
+        setDetail(itemid);
       } else {
         document.title = '没有发现海报';
         $('#open-failed').show();

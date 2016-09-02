@@ -162,9 +162,15 @@ html, body {
   line-height: .65rem;
 }
 
+.poster-wrap {
+  padding-top: 2.6rem;
+}
+
 .poster-wall {
   display: flex;
   flex-direction: column;
+  background: url("../img/poster-bg.png");
+  background-size: cover;
 
   .poster-row {
     display: flex;
@@ -206,20 +212,37 @@ html, body {
   }
 }
 
+.rule-cont {
+  height: 100%;
+  position: relative;
+  background: url("../img/poster-bg.png");
+  background-size: cover;
+}
+
 .open-cont {
   height: 100%;
   display: flex;
   flex-direction: column;
   position: relative;
+  background: url("../img/poster-bg.png");
+  background-size: cover;
 
-  #seal-scroll {
-    padding-top: 2.65rem;
+  .seal-scroll-wrap {
+    flex: 1;
+    text-align: center;
+    img {
+      display: inline-block;
+      width: 60%;
+      height: auto;
+    }
   }
 }
 
 .open-failed {
   height: 100%;
   position: relative;
+  background: url("../img/poster-bg.png");
+  background-size: cover;
   .flex-row__centered {
     padding-top: 3rem;
   }
@@ -227,23 +250,33 @@ html, body {
     width: 4.72rem;
     height: 1.83rem;
   }
+
+  .title-scroll-not-found {
+    width: 100%;
+    height: .72rem;
+    background: url("../slice/title-scroll-not-found.png") no-repeat;
+    background-size: auto 100%;
+    background-position: center;
+  }
 }
 
 .open-succ {
+  height: 100%;
+  background: url("../img/poster-bg.png");
+  background-size: cover;
 
   .poster-cont {
-    width: 4.85rem;
-    height: 6.58rem;
+    width: 100%;
+    height: 6.54rem;
     position: relative;
-    margin: 0 auto;
-    padding-top: .6rem;
+    padding-top: 1.7rem;
+    background: url("../img/canvas.png") no-repeat center;
+    background-size: cover;
     img {
       display: block;
-      width: 100%;
+      width: 60%;
       height: auto;
-      position: relative;
-      border-radius: .1rem;
-      box-shadow: 0px 7px 5px rgba(#000, .15);
+      margin: 0 auto;
     }
   }
 
@@ -261,6 +294,34 @@ html, body {
     top: .35rem;
     z-index: 5;
     box-shadow: 2px 2px 3px rgba(#000, .5);
+  }
+
+  .title-get-poster {
+    width: 100%;
+    height: 1.25rem;
+    background: url("../slice/title-get-poster.png") no-repeat center;
+    background-size: contain;
+  }
+
+  .btn-wrap {
+    width: 100%;
+    position: absolute;
+    bottom: 1.45rem;
+
+    .succ-btn {
+      display: inline-block;
+      width: 2.8rem;
+      height: .9rem;
+      background: rgba(0, 0, 0, .7);
+      border-radius: .45rem;
+      color: #fff;
+      font-size: .42rem;
+      text-align: center;
+      line-height: .9rem;
+      &.btn-continue {
+        margin-left: .2rem;
+      }
+    }
   }
 }
 
@@ -297,12 +358,12 @@ html, body {
   background-size: cover;
 
   .poster-exp {
-    font-size: .28rem;
-    color: #333333;
-    text-align: center;
     margin: .26rem 0 .46rem 0;
-    b {
-      font-weight: bold;
+    .title-gallery-voucher {
+      width: 100%;
+      height: .71rem;
+      background: url("../slice/title-gallery-voucher.png") no-repeat center;
+      background-size: contain;
     }
   }
 }
@@ -315,8 +376,8 @@ html, body {
 
   .scroll {
     position: absolute;
-    width: 1.2rem;
-    height: 1.2rem;
+    width: 1.4rem;
+    height: 1.66rem;
     @include base64("../img/scroll.png");
     background-size: contain;
   }
@@ -348,6 +409,9 @@ html, body {
   background: rgba(#333333, .8);
   width: 100%;
   padding: 1rem 0 .3rem 0;
+  position: fixed;
+  top: 0;
+  z-index: 15;
 }
 
 .prog-wrap {
@@ -481,3 +545,10 @@ html, body {
   }
 }
 
+.title-scroll-found {
+  width: 100%;
+  height: 1.52rem;
+  background: url("../slice/title-scroll-found.png") no-repeat;
+  background-size: auto 100%;
+  background-position: center;
+}
