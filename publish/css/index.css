@@ -80,11 +80,18 @@ html, body {
 .rule-box .rule-item {
   color: #fff;
   margin-bottom: .45rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
 }
 
 .rule-box .rule-item .rule-no {
-  display: inline-block;
-  vertical-align: middle;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 1 .72rem;
+          flex: 0 1 .72rem;
   font-size: .4rem;
   border-radius: 50%;
   text-align: center;
@@ -94,16 +101,10 @@ html, body {
   margin-right: .14rem;
 }
 
-.rule-box .rule-item .rule-no:before {
-  content: "";
-  display: inline-block;
-  vertical-align: middle;
-  height: .74rem;
-}
-
 .rule-box .rule-item .rule-exp {
-  display: inline-block;
-  vertical-align: middle;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 1 3.1rem;
+          flex: 0 1 3.1rem;
   font-size: .28rem;
   width: 3.1rem;
   word-break: break-word;
@@ -282,12 +283,13 @@ html, body {
 }
 
 .open-failed .flex-row__centered {
-  padding-top: 3rem;
+  padding-top: 1rem;
 }
 
 .open-failed .empty-scroll {
-  width: 4.72rem;
-  height: 1.83rem;
+  display: block;
+  width: 5.3rem;
+  height: 5.09rem;
 }
 
 .open-failed .title-scroll-not-found {

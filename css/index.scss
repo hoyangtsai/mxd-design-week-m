@@ -69,16 +69,11 @@ html, body {
   .rule-item {
     color: #fff;
     margin-bottom: .45rem;
+    display: flex;
+    align-items: center;
 
     .rule-no {
-      &:before {
-        content: "";
-        display: inline-block;
-        vertical-align: middle;
-        height: .74rem;
-      }
-      display: inline-block;
-      vertical-align: middle;
+      flex: 0 1 .72rem;
       font-size: .4rem;
       border-radius: 50%;
       text-align: center;
@@ -89,8 +84,7 @@ html, body {
     }
 
     .rule-exp {
-      display: inline-block;
-      vertical-align: middle;
+      flex: 0 1 3.1rem;
       font-size: .28rem;
       width: 3.1rem;
       word-break: break-word;
@@ -243,12 +237,14 @@ html, body {
   position: relative;
   background: url("../img/poster-bg.png");
   background-size: cover;
+
   .flex-row__centered {
-    padding-top: 3rem;
+    padding-top: 1rem;
   }
   .empty-scroll {
-    width: 4.72rem;
-    height: 1.83rem;
+    display: block;
+    width: 5.3rem;
+    height: 5.09rem;
   }
 
   .title-scroll-not-found {
